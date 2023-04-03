@@ -1,0 +1,51 @@
+.myblue{
+    background-color: #55ACEE;
+}
+.darkBg{
+    background-color: #292F33;
+}
+.sliderPic{
+    width: 100vw;
+    max-height: 100vh;
+}
+.sliderItem{
+    width: 100%;
+    max-height: 50vh;
+}
+@font-face {
+    font-family: 'Knewave';
+    font-style: normal;
+    font-weight: normal;
+    src: url('../fonts/Knewave-Regular.ttf');
+  }
+  .KnewaveFont {
+    font-family: 'Knewave';
+  }
+  .cardImg {
+    width:80px;
+    height: 110px;
+  }
+  .bgDarklight {
+    background-color: #66757F;
+  }
+  .bgDarkest {
+    background-color: #221F1F;
+  }
+  .productImg {
+    max-width:280px;
+    max-height: 300px;
+  }
+  .des{
+    text-align: justify;
+    line-height: 24px;
+  }
+  .cartImg {
+    width: 60px;
+    height: 90px;
+  }
+  .minH {
+    min-height: 65vh;
+  }
+  .hLoading {
+    height: 90vh;
+  }
