@@ -1,12 +1,13 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import style from '../styles/style.module.css';
 import { Container, Row } from 'react-bootstrap';
 import MyCard from './Card';
 import {ProductsContext} from '../context/ContextProductsProvider';
+import { useSelector } from 'react-redux';
 
 const  Popular = () => {
 
-    const products = useContext(ProductsContext);
+  const products = useSelector(state => state.productsState.products);
 
   return (
     <Container fluid className={`${style.darkBg}`}>

@@ -1,22 +1,24 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, {useEffect, useState } from 'react';
 import MyNavbar from './MyNavbar';
 import Newest from './Newest';
 import Slider from './Slider';
 import Popular from './Popular';
 import Footer from './Footer';
-import { ProductsContext } from '../context/ContextProductsProvider';
 import Loading from './Loading';
-
+import { fetchProducts } from '../rdux/products/productsAtion';
+import { useSelector, useDispatch } from 'react-redux';
 const Home = () => {
 
-  const products = useContext(ProductsContext);
-  const [show, setShow] = useState(true);
-  useEffect(() =>{
-    if(products.length > 19){
-      setShow(false);
-    }
-  },[products])
+  const [show, setShow] = useState(false);
+  const dispatch = useDispatch();
+    const productsState = useSelector(state => state.productsState)
 
+    useEffect(() => {
+        if (!productsState.products.length) dispatch(fetchProducts())
+        if(productsState.products.length > 19){
+         // setShow(false);
+        }
+    }, [])
 
   return (
     <> 
