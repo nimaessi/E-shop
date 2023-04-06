@@ -9,14 +9,14 @@ import { fetchProducts } from '../rdux/products/productsAtion';
 import { useSelector, useDispatch } from 'react-redux';
 const Home = () => {
 
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState(true);
   const dispatch = useDispatch();
     const productsState = useSelector(state => state.productsState)
 
     useEffect(() => {
-        if (!productsState.products.length) dispatch(fetchProducts())
-        if(productsState.products.length > 19){
-         // setShow(false);
+        if (!productsState.products.length) dispatch(fetchProducts());
+        if(!productsState.loading){
+          setShow(false);
         }
     }, [])
 

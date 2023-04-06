@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {Col, Container, Row } from 'react-bootstrap';
 import * as Icon from 'react-bootstrap-icons';
 import style from '../styles/style.module.css';
@@ -8,9 +8,9 @@ import Button from 'react-bootstrap/Button';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import Card from 'react-bootstrap/Card';
-import { CartContext } from '../context/CartContextProvider';
 import { isInCart,quantityCount } from '../helper/function';
-
+import { useSelector, useDispatch } from 'react-redux';
+import { addItem, removeItem, increase, decrease } from '../rdux/cart/cartAction';
 const initialState ={
     id: 0,
     title: "",
@@ -26,8 +26,9 @@ const initialState ={
 const Product = () => {
 
     const params = useParams();
+    const state = useSelector(state => state.cartState);
+    const dispatch = useDispatch();
     const [product,setProduct] = useState(initialState);
-    const {state,dispatch} = useContext(CartContext); 
     const totalStars = 5;
     useEffect(() => {
         const fetchProduct = async () =>{
@@ -56,12 +57,12 @@ const Product = () => {
                         <p>category : {category}</p>
                         { 
                         isInCart(state,id) ?
-                        <Button onClick={() => dispatch({type:"INCREASE", payload : product})} variant='primary'><Icon.Plus className='ms-1'/></Button> :
-                        <Button onClick={() => dispatch({type:"ADD_ITEM", payload: product})} variant='primary'>Add to cart<Icon.Cart className='ms-1'/></Button>
+                        <Button onClick={() => dispatch(increase(product))} variant='primary'><Icon.Plus className='ms-1'/></Button> :
+                        <Button onClick={() => dispatch(addItem(product))} variant='primary'>Add to cart<Icon.Cart className='ms-1'/></Button>
                         }
                         {quantityCount(state,id) > 0 && <span className='mx-2'>{quantityCount(state,id)}</span>}
-                        {quantityCount(state,id) > 1 && <Button  onClick={() => dispatch({type:"DECREASE",payload: product})} variant='danger ms-1'><Icon.Dash className='ms-1'/></Button>}
-                        {quantityCount(state,id) === 1 && <Button onClick={() => dispatch({type:"REMOVE_ITEM",payload: product})} variant='danger ms-1'><Icon.Trash className='ms-1'/></Button>}
+                        {quantityCount(state,id) > 1 && <Button  onClick={() => dispatch(decrease(product))} variant='danger ms-1'><Icon.Dash className='ms-1'/></Button>}
+                        {quantityCount(state,id) === 1 && <Button onClick={() => dispatch(removeItem(product))} variant='danger ms-1'><Icon.Trash className='ms-1'/></Button>}
                     </Card.Body>
                 </Card>
             </Col>

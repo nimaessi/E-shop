@@ -6,10 +6,11 @@ import * as Icon from 'react-bootstrap-icons';
 import styles from '../styles/style.module.css';
 import Badge from 'react-bootstrap/Badge';
 import { Link } from 'react-router-dom';
-
+import { useSelector } from 'react-redux';
 const MyNavbar = () => {
 
-  
+    const state = useSelector(state => state.cartState);
+
   return (
         <Navbar collapseOnSelect className={styles.myblue} expand="lg">
             <Container fluid>
@@ -20,7 +21,7 @@ const MyNavbar = () => {
                     <Link className="me-3 text-light fw-bold fs-5" to="/allproducts">Products</Link>
                     <Nav>
                         <Link to="/cart" className="text-light fw-bold fs-4">
-                            <Badge className='fs-6' pill bg="danger">0</Badge>
+                            <Badge className='fs-6' pill bg="danger">{state.itemsCounter}</Badge>
                             <Icon.CartFill/>
                         </Link>
                     </Nav>

@@ -1,19 +1,18 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Container } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import * as Icon from 'react-bootstrap-icons';
 import {Row} from 'react-bootstrap';
 import style from '../styles/style.module.css';
-import { ProductsContext } from '../context/ContextProductsProvider';
 import { useNavigate } from 'react-router-dom';
 import { shortTitle } from '../helper/function';
 import MyNavbar from './MyNavbar';
 import Footer from './Footer';
-
+import { useSelector } from 'react-redux';
 const Products = () => {
   
-    const products = useContext(ProductsContext);
+    const products = useSelector(state => state.productsState.products);
     const navigate = useNavigate();
 
   return (
